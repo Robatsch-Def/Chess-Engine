@@ -12,8 +12,8 @@ pub fn chess() {
 	}
 	println!("End of game.");
 }
-fn is_valid_format(chess_move: String) -> bool {
-	//e4, exd4, exg8=Q
+fn is_valid_format(chess_move: String) -> bool { //TODO: Replace with Regex
+	//e4, exd4, exg8=Q, e8=R
 	//Bf4, Bxf4, R1e2, Rfd8, Qh4e1, Qh2xe1
 	let move_vec: Vec<char> = chess_move.chars().collect();
 	const file_chars: [char;8] = [
@@ -37,7 +37,7 @@ fn is_valid_format(chess_move: String) -> bool {
 
 }
 fn create_piece(
-	piece_type: PieceType, color: PieceColor, space: &str
+	piece_type: PieceType, color: bool, space: &str
 ) -> ChessPiece {
 	ChessPiece {
 		piece_type: piece_type,
@@ -50,52 +50,49 @@ enum PieceType {
 	King, Queen, Rook,
 	Bishop, Knight, Pawn
 }
-enum PieceColor {
-	Black, White
-}
 struct ChessPiece<'a> {
 	piece_type: PieceType,
-	color: PieceColor,
+	is_white: bool,
 	space: &'a str,
 	is_alive: bool
 }
 fn new_game() -> [[ChessPiece;16];2]{
 	[
 		[
-			create_piece(PieceType::King, PieceColor::White, "e1"),
-			create_piece(PieceType::Queen, PieceColor::White, "d1"),
-			create_piece(PieceType::Rook, PieceColor::White, "a1"),
-			create_piece(PieceType::Rook, PieceColor::White, "h1"),
-			create_piece(PieceType::Bishop, PieceColor::White, "c1"),
-			create_piece(PieceType::Bishop, PieceColor::White, "f1"),
-			create_piece(PieceType::Knight, PieceColor::White, "b1"),
-			create_piece(PieceType::Knight, PieceColor::White, "g1"),
-			create_piece(PieceType::Pawn, PieceColor::White, "a2"),
-			create_piece(PieceType::Pawn, PieceColor::White, "b2"),
-			create_piece(PieceType::Pawn, PieceColor::White, "c2"),
-			create_piece(PieceType::Pawn, PieceColor::White, "d2"),
-			create_piece(PieceType::Pawn, PieceColor::White, "e2"),
-			create_piece(PieceType::Pawn, PieceColor::White, "f2"),
-			create_piece(PieceType::Pawn, PieceColor::White, "g2"),
-			create_piece(PieceType::Pawn, PieceColor::White, "h2"),
+			create_piece(PieceType::King, true, "e1"),
+			create_piece(PieceType::Queen, true, "d1"),
+			create_piece(PieceType::Rook, true, "a1"),
+			create_piece(PieceType::Rook, true, "h1"),
+			create_piece(PieceType::Bishop, true, "c1"),
+			create_piece(PieceType::Bishop, true, "f1"),
+			create_piece(PieceType::Knight, true, "b1"),
+			create_piece(PieceType::Knight, true, "g1"),
+			create_piece(PieceType::Pawn, true, "a2"),
+			create_piece(PieceType::Pawn, true, "b2"),
+			create_piece(PieceType::Pawn, true, "c2"),
+			create_piece(PieceType::Pawn, true, "d2"),
+			create_piece(PieceType::Pawn, true, "e2"),
+			create_piece(PieceType::Pawn, true, "f2"),
+			create_piece(PieceType::Pawn, true, "g2"),
+			create_piece(PieceType::Pawn, true, "h2"),
 		],
 		[
-			create_piece(PieceType::King, PieceColor::Black, "e8"),
-			create_piece(PieceType::Queen, PieceColor::Black, "d8"),
-			create_piece(PieceType::Rook, PieceColor::Black, "a8"),
-			create_piece(PieceType::Rook, PieceColor::Black, "h8"),
-			create_piece(PieceType::Bishop, PieceColor::Black, "c8"),
-			create_piece(PieceType::Bishop, PieceColor::Black, "f8"),
-			create_piece(PieceType::Knight, PieceColor::Black, "b8"),
-			create_piece(PieceType::Knight, PieceColor::Black, "g8"),
-			create_piece(PieceType::Pawn, PieceColor::Black, "a7"),
-			create_piece(PieceType::Pawn, PieceColor::Black, "b7"),
-			create_piece(PieceType::Pawn, PieceColor::Black, "c7"),
-			create_piece(PieceType::Pawn, PieceColor::Black, "d7"),
-			create_piece(PieceType::Pawn, PieceColor::Black, "e7"),
-			create_piece(PieceType::Pawn, PieceColor::Black, "f7"),
-			create_piece(PieceType::Pawn, PieceColor::Black, "g7"),
-			create_piece(PieceType::Pawn, PieceColor::Black, "h7"),
+			create_piece(PieceType::King, false, "e8"),
+			create_piece(PieceType::Queen, false, "d8"),
+			create_piece(PieceType::Rook, false, "a8"),
+			create_piece(PieceType::Rook, false, "h8"),
+			create_piece(PieceType::Bishop, false, "c8"),
+			create_piece(PieceType::Bishop, false, "f8"),
+			create_piece(PieceType::Knight, false, "b8"),
+			create_piece(PieceType::Knight, false, "g8"),
+			create_piece(PieceType::Pawn, false, "a7"),
+			create_piece(PieceType::Pawn, false, "b7"),
+			create_piece(PieceType::Pawn, false, "c7"),
+			create_piece(PieceType::Pawn, false, "d7"),
+			create_piece(PieceType::Pawn, false, "e7"),
+			create_piece(PieceType::Pawn, false, "f7"),
+			create_piece(PieceType::Pawn, false, "g7"),
+			create_piece(PieceType::Pawn, false, "h7"),
 		]
 	]
 }
