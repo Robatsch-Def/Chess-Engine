@@ -1,4 +1,5 @@
 #![allow(dead_code)]
+use regex::Regex;
 pub fn chess() {
 	let mut board = new_game();
 	let mut input_move: String = String::new();
@@ -15,26 +16,9 @@ pub fn chess() {
 fn is_valid_format(chess_move: String) -> bool { //TODO: Replace with Regex
 	//e4, exd4, exg8=Q, e8=R
 	//Bf4, Bxf4, R1e2, Rfd8, Qh4e1, Qh2xe1
-	let move_vec: Vec<char> = chess_move.chars().collect();
-	const file_chars: [char;8] = [
-		'a','b','c','d','e','f','g','h'
-	];
-	const rank_chars: [char;8] = [
-		'1','2','3','4','5','6','7','8'
-	];
-	const type_chars: [char;5] = [
-		'K','Q','R','B','N'
-	];
-	const other_chars: [char;2] = [
-		'x','='
-	]
-	//Remember the 'x' for captures!
-	if type_chars.contains(move_vec[0]) { //Is not a pawn
-
-	} else { //Is a pawn
-
+	if Regex::new(r"").unwwrap().is_match(chess_move) {
+	
 	}
-
 }
 fn create_piece(
 	piece_type: PieceType, color: bool, space: &str
